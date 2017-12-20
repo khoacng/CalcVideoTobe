@@ -38,7 +38,8 @@
       // Call handleAuthClick function when user clicks on "Authorize" button.
       $('#execute-request-button').click(function() {
         // handleAuthClick(event);
-        getMostPopular();
+        // getMostPopular();
+        searchMostView();
       }); 
     });
   }
@@ -107,7 +108,7 @@
 
       document.getElementById('img1').src = response.items[0].snippet.thumbnails.medium.url;
       document.getElementById('li01').innerHTML = response.items[0].snippet.title;
-      document.getElementById('li02').innerHTML = response.items[0].statistics.viewCount;
+      // document.getElementById('li02').innerHTML = response.items[0].statistics.viewCount;
       $('#img1').click(function() {
         newSite(response.items[0].id);
       }); 
@@ -186,9 +187,22 @@
                  'maxResults': '5',
                  'pageToken': ''});
   }
+
+  // search most view
+  function searchMostView() {
+    buildApiRequest('GET',
+                '/youtube/v3/search',
+                {'part': 'snippet',
+                 'key': 'AIzaSyCk1r6aQeNMRWT2RKTBy5qXwufcuA-0dRg',
+                 'maxResults': '5',
+                 'order': 'viewCount',
+                 'q': 'youtube.com',
+                 'type': 'video',
+                 'pageToken': ''});
+  }
 </script>
 
-<button id="execute-request-button">Most Popular by Region</button>
+<button id="execute-request-button">Search Most View</button>
 <button id="top1">Top 1</button>
 <button id="top2">Top 2</button>
 <button id="top3">Top 3</button>
